@@ -13,11 +13,7 @@ def hi(df, word, stat, ax):
     
     x = pd.DataFrame([(x, float(ave_fraction.loc[x])) for x in top_five]).sort_values(by=1)
 
-    sns.barplot(data=x, x=0, y = 1, ax=ax)
-    ax.set_xlabel('Make_Model')
-    ax.set_ylabel(stat)
-    ax.set_title(word+' Models')
-
+    sns.barplot(data=x, x=0, y = 1, ax=ax).set(xlabel='Make_Model', ylabel=stat, title=word+" Models")
 
 
 def performance_make_damage(df, stat):
@@ -26,12 +22,10 @@ def performance_make_damage(df, stat):
   df_destroyed = df[df["Aircraft.damage"] == "Destroyed"]
 
   order = df_substantial[["Make",stat]].groupby("Make").mean().sort_values(by=stat, ascending=False).index
-  sns.barplot(data=df_substantial, x='Make', y = stat, order=order, ax=ax[0])
-  ax[0].set_title(stat + " vs. Make for Substantial Damage")
+  sns.barplot(data=df_substantial, x='Make', y = stat, order=order, ax=ax[0]).set(title=stat + " vs. Make for Substantial Damage")
 
   order = df_destroyed[["Make",stat]].groupby("Make").mean().sort_values(by=stat, ascending=False).index
-  sns.barplot(data=df_destroyed, x='Make', y = stat, order=order, ax=ax[1])
-  ax[1].set_title(stat + " vs. Make for Destroyed Damage")
+  sns.barplot(data=df_destroyed, x='Make', y = stat, order=order, ax=ax[1]).set(title=stat + " vs. Make for Destroyed Damage")
 
   fig.savefig("Images/" + stat + "Make")
 
@@ -44,12 +38,12 @@ def performance_phase(df, stat):
 
   order = df[["Broad.phase.of.flight",stat]].groupby("Broad.phase.of.flight").mean().sort_values(by=stat,ascending=False).index
 
-  sns.barplot(data=df, y='Broad.phase.of.flight', x = stat, order=order, ax=ax)
-  ax.set_title(stat + " vs. Phase of Flight", fontsize=16, fontweight = 'bold')
+  sns.barplot(data=df, y='Broad.phase.of.flight', x = stat, order=order, ax=ax).set(title=stat + " vs. Phase of Flight", 
+                                                                                   xlabel=stat, ylabel="Phase of flight")
 
-  ax.tick_params(labelsize=12)
-  ax.set_xlabel(stat, fontweight = 'bold', fontsize=14)
-  ax.set_ylabel('Phase of flight', fontweight = 'bold', fontsize=14)
+  #ax.tick_params(labelsize=12)
+  #ax.set_xlabel(stat, fontweight = 'bold', fontsize=14)
+  #ax.set_ylabel('Phase of flight', fontweight = 'bold', fontsize=14)
 
   fig.savefig("Images/PhaseOfFlight" + stat)
 
@@ -64,9 +58,8 @@ def best_models(df):
    xy = pd.DataFrame([(x,float(ave_frac.loc[x])) for x in top_5]).sort_values(by=1)
    fig, ax = plt.subplots(figsize = (10,7))
 
-   sns.barplot(data=xy, x=0, y=1)
-   ax.set_xlabel("Make_Model")
-   ax.set_ylabel("Fraction Uninjured")
-   ax.set_title("Destroyed per Make_Model in Uninjured")
+   sns.barplot(data=xy, x=0, y=1).set(xlabel="Make_Model", ylabel="Fraction Uninjured", title="Destroyed per Make_Model in Ininjured")
+   #ax.set_ylabel("Fraction Uninjured")
+   #ax.set_title("Destroyed per Make_Model in Uninjured")
 
    fig.savefig("Images/Make_ModelDestroyedUninjured")
