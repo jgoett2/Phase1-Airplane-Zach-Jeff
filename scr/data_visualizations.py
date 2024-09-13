@@ -11,7 +11,7 @@ def hi(df, word, stat, ax):
     ave_fraction = dfB[["Make_Model",stat]].groupby("Make_Model").mean()
     ave_fraction
     
-    x = pd.DataFrame([(x, float(ave_fraction.loc[x])) for x in top_five]).sort_values(by=1)
+    x = pd.DataFrame([(x, float(ave_fraction.loc[x].iloc[0])) for x in top_five]).sort_values(by=1)
 
     sns.barplot(data=x, x=0, y = 1, ax=ax).set(xlabel='Make_Model', ylabel=stat, title=word+" Models")
 
