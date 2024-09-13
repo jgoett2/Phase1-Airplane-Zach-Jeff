@@ -20,59 +20,72 @@ In order to choose safe airplanes for the flight school, we will investigate the
 
 To measure airplane safety, we will consider the protection offered by the airplane during an accident.  We will look at this three different ways
 - **Survive:** The fraction of accidents with no fatalities.  
-- **Survival Rate:** The fraction of passengers killed during an accident
-- **Injury Rate:** The fraction of passengers uninjured during an accident. 
-
-## Data Understanding
-
-## Intake Data 
-
-In this analysis we read in the entire AviationData dataset.  For each record, we use the following data:
-- Event Date
-- Make of Airplane
-- Accidents injured, killed, minor injuries, and uninjured passengers in each accident
-- Phase of Flight and weather conditions
+- **Fraction Fatal:** The fraction of passengers killed during an accident
+- **Fraction Uninjured:** The fraction of passengers uninjured during an accident. 
 
 ## Analysis
 
 ### Airplane Safety by Make of Aircraft
+
+First, we will identify airplane manufacturers that make airplanes with the best protection during accidents.  To do this, we average the statistic survive across all accidents associated with each manufacturer, and graph the results. The graph shows that Cessna, Bell, and Piper aircraft offer the best protection during accidents.  There are no fatalities in 80% of accidents involving their aircraft.  Mooney and Beech perform 10% worse, with only 70% of accidents with their aircraft involving no fatalities.
+
     
-![png](Reports/Images/output_14_0.png)
-    
-
-![png](Reports/Images/output_15_0.png)
-
-
 ![png](Reports/Images/output_16_0.png)
+    
 
-### Model Safety
+When breaking down accidents further to consider whether aircraft sustain substantial damage or are destroyed, we find that Cessna, Bell, and Piper makes consistently offer the best protection of the five.
+
     
 ![png](Reports/Images/output_18_0.png)
     
     
 ![png](Reports/Images/output_19_0.png)
     
-    
-![png](Reports/Images/output_21_1.png)
+
+### Model Safety
+
+Knowing the Cessna, Piper, and Bell offer the best protection during accidents, we look at specific models manufactured by each, and identify which are the safest.  Again, we break down the statistics to separately consider cases where aircraft are substantially damaged and destroyed.
+
+
+![png](Reports/Images/output_22_0.png)
     
 
-### Airplane Safety during Phases of Flight
     
 ![png](Reports/Images/output_23_0.png)
-    
 
-![png](Reports/Images/output_24_0.png)
-    
 
+Based on the above analysis, we compare the top 5 models, and find that the Cessna 172, Cessna 152, and Piper PA-28 are the safest light aircraft.  In the graph of fraction uninjured vs. model, we see these three aircrafts offer the best protection.
+
+    
+![png](Reports/Images/output_25_1.png)
+
+
+### Airplane Safety during Phases of Flight
+
+To help our students become safer pilots, we consider which phases of flight have historically lead to the most accident fatalities in light weight aircraft.  Below, we consider the fraction of passengers killed during each phase of flight.  We find the maneuvering, climbing, and cruising are the most dangerous phases.
+
+
+![png](Reports/Images/output_29_0.png)
+
+
+We discover similar results when considering an "inverse statistic", the fraction of passengers uninjured during accidents during each phase.
+
+    
+![png](Reports/Images/output_31_0.png)
 
 Calculating Heatmap
 
-![png](Reports/Images/output_27_0.png)
+For fun, we break down how different aircraft make perform safety wise during different flight phases.  Our safeest manufacturers, Cessna and Bell, both encounter their most dangerous phases during maneuvering.
+
     
+![png](Reports/Images/output_35_0.png)
 
 ### Airplane Safety during Different Months of the Year
 
-![png](Reports/Images/output_29_0.png)
+Finally, to support our students, we investigate which months of the year are correlated to the most deadly accidents.  In the graphs of month vs. fraction fatal and fraction uninjured below, we find that the winter months are correlated to higher fatality rates, and the summer months are correlated to the best survival rates.
+
+
+![png](Reports/Images/output_38_0.png)
     
 
 ## Conclusions
