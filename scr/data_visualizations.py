@@ -33,12 +33,12 @@ def performance_make_damage(df, stat):
 def performance_phase(df, stat):
   fig, ax = plt.subplots(figsize= (12,6))
 
-  phases_flight = df["Broad.phase.of.flight"].value_counts().index[:-2]
+  phases_flight = df["Broad.phase.of.flight"].value_counts().drop(["Unknown", "Other"]).index
   df_phases = df[df["Broad.phase.of.flight"].map(lambda x: x in phases_flight)]
 
-  order = df[["Broad.phase.of.flight",stat]].groupby("Broad.phase.of.flight").mean().sort_values(by=stat,ascending=False).index
+  order = df_phases[["Broad.phase.of.flight",stat]].groupby("Broad.phase.of.flight").mean().sort_values(by=stat,ascending=False).index
 
-  sns.barplot(data=df, y='Broad.phase.of.flight', x = stat, order=order, ax=ax).set(title=stat + " vs. Phase of Flight", 
+  sns.barplot(data=df_phases, y='Broad.phase.of.flight', x = stat, order=order, ax=ax).set(title=stat + " vs. Phase of Flight", 
                                                                                    xlabel=stat, ylabel="Phase of flight")
 
   #ax.tick_params(labelsize=12)
